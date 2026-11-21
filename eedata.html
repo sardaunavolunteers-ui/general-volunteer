@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sardauna Volunteer Batch Form</title>
+  <style>
+    :root {
+      --primary-blue: #0A3D62;
+      --accent-green: #2ECC71;
+      --dark-green: #1E8449;
+      --bg-gradient: linear-gradient(135deg, #0A3D62 0%, #1E8449 100%);
+      --text-color: #2C3E50;
+      --border-color: #CBD5E1;
+    }
+
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+    body {
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .form-card {
+      background: #FFFFFF;
+      width: 100%;
+      max-width: 850px;
+      border-radius: 16px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    .form-header {
+      background: var(--primary-blue);
+      color: #FFFFFF;
+      padding: 25px 20px;
+      text-align: center;
+      border-bottom: 5px solid var(--accent-green);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .logo-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #FFFFFF;
+      background: #FFFFFF;
+    }
+
+    .form-header h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .form-body { padding: 30px; }
+
+    .section-divider {
+      background: #E2E8F0;
+      height: 2px;
+      margin: 30px 0;
+    }
+
+    .section-heading {
+      color: var(--primary-blue);
+      font-size: 18px;
+      margin-bottom: 15px;
+      border-left: 4px solid var(--dark-green);
+      padding-left: 10px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+
+    label.field-label {
+      display: block;
+      font-weight: 600;
+      color: var(--primary-blue);
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    input[type="text"], input[type="tel"], select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 15px;
+      color: var(--text-color);
+      background-color: #F8FAFC;
+    }
+
+    input[type="text"]:focus, input[type="tel"]:focus, select:focus {
+      outline: none;
+      border-color: var(--accent-green);
+      background-color: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+    }
+
+    .person-card {
+      background: #F8FAFC;
+      border: 1px solid var(--border-color);
+      border-left: 5px solid var(--accent-green);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 15px;
+    }
+
+    .person-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .left-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 30px;
+      height: 30px;
+      padding: 0 8px;
+      border-radius: 6px;
+      background: var(--primary-blue);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .person-top h4 {
+      margin: 0;
+      color: var(--primary-blue);
+      font-size: 15px;
+    }
+
+    .person-grid {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1.2fr;
+      gap: 12px;
+      align-items: flex-end;
+    }
+
+    @media (max-width: 700px) {
+      .person-grid { grid-template-columns: 1fr; }
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--dark-green);
+      color: #FFFFFF;
+      border: none;
+      padding: 15px;
+      font-size: 17px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .submit-btn:hover { background: #145A32; }
+    .submit-btn:disabled { background: #BDC3C7; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+
+<div class="form-card">
+  <div class="form-header">
+    <div class="header-content">
+      <img src="logo.png" alt="SVP Logo" class="logo-img" onerror="this.style.display='none'">
+      <h1>Sardauna Volunteer Form</h1>
+    </div>
+  </div>
+
+  <div class="form-body">
+    <form id="batchForm">
+      
+      <!-- Shared Location Info -->
+      <div class="section-heading">1. Shared Polling Unit Location</div>
+      
+      <div class="form-group">
+        <label class="field-label" for="lga">Local Government Area (LGA)</label>
+        <select id="lga" name="lga" required>
+          <option value="">Select LGA</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="field-label" for="ward">Ward</label>
+        <select id="ward" name="ward" required disabled>
+          <option value="">Select Ward</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="field-label" for="pollingUnit">Polling Unit Name</label>
+        <select id="pollingUnit" name="pollingUnit" required disabled>
+          <option value="">Select Polling Unit</option>
+        </select>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Merged General Voters (Up to 10 People) -->
+      <div class="section-heading">2. General Voters (1 to 10 People)</div>
+      <div id="votersContainer"></div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">Submit Registrations</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbydgiStMW2VGhv_nCmjdt-zRI3CrHkxCLRFxGasbnsBE4mtsYezXF_juxfIm7_4Qxca9w/exec";
+  const FIXED_ROLE = "GENERAL VOTER";
+  const MAX_VOTERS = 10;
+
+  let dataset = {};
+
+  const lgaSelect = document.getElementById("lga");
+  const wardSelect = document.getElementById("ward");
+  const puSelect = document.getElementById("pollingUnit");
+  const votersContainer = document.getElementById("votersContainer");
+
+  // Generate up to 10 General Voter cards with far-left plain numbering (1, 2, 3...)
+  for (let i = 1; i <= MAX_VOTERS; i++) {
+    const card = document.createElement("div");
+    card.className = "person-card member-row";
+    card.setAttribute("data-role", FIXED_ROLE);
+    card.innerHTML = `
+      <div class="person-top">
+        <span class="left-number">${i}</span>
+        <h4>General Voter</h4>
+      </div>
+      <div class="person-grid">
+        <div>
+          <label class="field-label">Full Name</label>
+          <input type="text" class="member-name" placeholder="Full Name">
+        </div>
+        <div>
+          <label class="field-label">Phone Number</label>
+          <input type="tel" class="member-phone" placeholder="Phone Number">
+        </div>
+        <div>
+          <label class="field-label">Gender</label>
+          <select class="member-gender">
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+      </div>
+    `;
+    votersContainer.appendChild(card);
+  }
+
+  // Fetch dataset from data.json
+  fetch('data.json')
+    .then(res => res.json())
+    .then(data => {
+      dataset = data;
+      for (let lga in dataset) {
+        let opt = document.createElement("option");
+        opt.value = lga;
+        opt.textContent = lga;
+        lgaSelect.appendChild(opt);
+      }
+    })
+    .catch(err => console.error("Error loading data.json:", err));
+
+  // LGA change event
+  lgaSelect.addEventListener("change", function() {
+    wardSelect.innerHTML = '<option value="">Select Ward</option>';
+    puSelect.innerHTML = '<option value="">Select Polling Unit</option>';
+    wardSelect.disabled = true;
+    puSelect.disabled = true;
+
+    if (this.value && dataset[this.value]) {
+      wardSelect.disabled = false;
+      for (let ward in dataset[this.value]) {
+        let opt = document.createElement("option");
+        opt.value = ward;
+        opt.textContent = ward;
+        wardSelect.appendChild(opt);
+      }
+    }
+  });
+
+  // Ward change event
+  wardSelect.addEventListener("change", function() {
+    puSelect.innerHTML = '<option value="">Select Polling Unit</option>';
+    puSelect.disabled = true;
+
+    const selectedLGA = lgaSelect.value;
+    if (this.value && dataset[selectedLGA][this.value]) {
+      puSelect.disabled = false;
+      dataset[selectedLGA][this.value].forEach(pu => {
+        let opt = document.createElement("option");
+        opt.value = pu;
+        opt.textContent = pu;
+        puSelect.appendChild(opt);
+      });
+    }
+  });
+
+  // Handle Form Submit
+  document.getElementById("batchForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const btn = document.getElementById("submitBtn");
+
+    const members = [];
+    const memberRows = document.querySelectorAll(".member-row");
+
+    memberRows.forEach((row) => {
+      const fullName = row.querySelector(".member-name").value.trim();
+      const phone = row.querySelector(".member-phone").value.trim();
+      const gender = row.querySelector(".member-gender").value;
+
+      if (fullName || phone || gender) {
+        members.push({
+          role: FIXED_ROLE,
+          fullName,
+          phone,
+          gender
+        });
+      }
+    });
+
+    if (members.length === 0) {
+      alert("Please enter details for at least 1 General Voter before submitting.");
+      return;
+    }
+
+    btn.innerText = "Submitting Batch...";
+    btn.disabled = true;
+
+    const formData = new FormData(this);
+    formData.append("role", FIXED_ROLE);
+    formData.append("members", JSON.stringify(members));
+
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: formData
+    })
+    .then(() => {
+      alert(`Batch submission successful! ${members.length} General Voter(s) registered.`);
+      this.reset();
+      wardSelect.disabled = true;
+      puSelect.disabled = true;
+      btn.innerText = "Submit Registrations";
+      btn.disabled = false;
+    })
+    .catch(err => {
+      alert("Error submitting form. Please check your connection and try again.");
+      btn.innerText = "Submit Registrations";
+      btn.disabled = false;
+    });
+  });
+</script>
+
+</body>
+</html>
