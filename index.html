@@ -223,35 +223,16 @@
 
 <script>
   // PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbybQZ0YdNrF5qsHcIo2R0GJiK0Yx9kJcFU4sJQRMZL0Zy4SSk1a4dXbQL2DTWJzCJjaNQ/exec;
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbybQZ0YdNrF5qsHcIo2R0GJiK0Yx9kJcFU4sJQRMZL0Zy4SSk1a4dXbQL2DTWJzCJjaNQ/exec";
   const FIXED_ROLE = "GENERAL VOTER";
   const MAX_VOTERS = 10;
 
   let dataset = {};
 
-  const form = document.getElementById("batchForm");
   const lgaSelect = document.getElementById("lga");
   const wardSelect = document.getElementById("ward");
   const puSelect = document.getElementById("pollingUnit");
   const votersContainer = document.getElementById("votersContainer");
-
-  // Move to the next enabled field when pressing Enter inside an input
-  form.addEventListener("keydown", function(e) {
-    if (e.key === "Enter" && e.target.tagName === "INPUT") {
-      e.preventDefault();
-      const focusable = [...form.querySelectorAll("input, select, button")].filter(
-        el => !el.disabled && el.offsetParent !== null
-      );
-      const currentIndex = focusable.indexOf(e.target);
-      if (currentIndex > -1 && currentIndex < focusable.length - 1) {
-        const nextEl = focusable[currentIndex + 1];
-        nextEl.focus();
-        if (nextEl.tagName === "INPUT") {
-          nextEl.select();
-        }
-      }
-    }
-  });
 
   // Generate up to 10 General Voter cards with far-left plain numbering (1, 2, 3...)
   for (let i = 1; i <= MAX_VOTERS; i++) {
@@ -335,7 +316,7 @@
   });
 
   // Handle Form Submit
-  form.addEventListener("submit", function(e) {
+  document.getElementById("batchForm").addEventListener("submit", function(e) {
     e.preventDefault();
     const btn = document.getElementById("submitBtn");
 
